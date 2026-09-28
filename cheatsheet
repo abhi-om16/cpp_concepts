@@ -1,0 +1,103 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> // Required for sort, reverse, and find
+
+// Utility function to easily print vectors in comments
+void printVector(const std::vector<int>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size(); ++i) {
+        std::cout << vec[i] << (i == vec.size() - 1 ? "" : ", ");
+    }
+    std::cout << "]\n";
+}
+
+int main() {
+    // ==========================================
+    // 0. INITIALIZATION
+    // ==========================================
+    std::vector<int> nums = {5, 2, 8}; 
+    // Initial state: [5, 2, 8]
+
+
+    // ==========================================
+    // 1. INSERTING ELEMENTS
+    // ==========================================
+    
+    // push_back(): Adds an element to the very end -> O(1)
+    nums.push_back(10); 
+    // State is now: [5, 2, 8, 10]
+
+    // insert(): Inserts value at a specific index (index 1 here) -> O(n)
+    nums.insert(nums.begin() + 1, 9); 
+    // State is now: [5, 9, 2, 8, 10]
+
+
+    // ==========================================
+    // 2. SORTING & MODIFYING ORDER
+    // ==========================================
+    
+    // sort(): Sorts in ascending order (smallest to largest) -> O(n log n)
+    std::sort(nums.begin(), nums.end()); 
+    // State is now: [2, 5, 8, 9, 10]
+
+    // reverse(): Reverses the order of elements -> O(n)
+    std::reverse(nums.begin(), nums.end()); 
+    // State is now: [10, 9, 8, 5, 2]
+
+    // Sorting in descending order using reverse iterators (rbegin/rend)
+    std::sort(nums.rbegin(), nums.rend()); 
+    // State is now: [10, 9, 8, 5, 2]
+
+
+    // ==========================================
+    // 3. UTILITY & SEARCHING
+    // ==========================================
+    
+    // size(): Returns the number of elements -> O(1)
+    int totalElements = nums.size(); 
+    // totalElements = 5
+
+    // empty(): Checks if the vector has 0 elements -> O(1)
+    bool isEmpty = nums.empty(); 
+    // isEmpty = false (0 means false in C++)
+
+    // std::find(): Looks for a value. Returns an iterator to it -> O(n)
+    auto it = std::find(nums.begin(), nums.end(), 8);
+    // 'it' points to the element 8 (at index 2)
+
+
+    // ==========================================
+    // 4. DELETING ELEMENTS
+    // ==========================================
+    
+    // pop_back(): Removes the last element -> O(1)
+    nums.pop_back(); 
+    // State is now: [10, 9, 8, 5]
+
+    // erase(): Removes an item at a specific index (index 1 here) -> O(n)
+    nums.erase(nums.begin() + 1); 
+    // State is now: [10, 8, 5]
+
+    // erase() combined with find(): Finds '8' and deletes it safely
+    auto target = std::find(nums.begin(), nums.end(), 8);
+    if (target != nums.end()) {
+        nums.erase(target);
+    }
+    // State is now: [10, 5]
+
+
+    // ==========================================
+    // 5. RESETTING
+    // ==========================================
+    
+    // assign(): Wipes current items, refills with 'n' copies of 'value' -> O(n)
+    nums.assign(3, 1); 
+    // State is now: [1, 1, 1]
+
+    // clear(): Completely empties the vector -> O(n)
+    nums.clear(); 
+    // State is now: [] (Empty)
+
+
+    return 0;
+}
